@@ -13,7 +13,7 @@ export default class TodoListItem extends Component {
         let classNames = 'todo-list-item';
         let classNamesEdit = 'edit-item';
         const {
-            label, onDeleted, onChecked, checked, onEditItem, color
+            label, onDeleted, onChecked, checked, onEditItem, color,
         } = this.props;
 
 
