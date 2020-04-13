@@ -1,0 +1,16 @@
+.todo-list-item.done {
+    text-decoration: line-through;
+}
+.todo-list-item {
+    color: green ;
+}
+
+.edit-item {
+    display: none;
+}
+.todo-list-item.edit {
+    display: none;
+}
+.edit-item.edit {
+    display: inline;
+}
