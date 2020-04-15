@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 
-import TodoList from "../todo-list";
+import TodoList from "../todoList";
 
-import ItemAddForm from "../item-add-form/item-add-form";
+import ItemAddForm from "../itemAddForm/item-add-form";
 
 
 export default class App extends Component {
@@ -12,9 +12,10 @@ export default class App extends Component {
         todoData: []
     };
 
-    createTodoItem(label,color) {
+    createTodoItem(label, color) {
         return {
-            label, color,
+            label,
+            color,
             id: this.maxId++,
             checked: false,
             edit: false,
@@ -24,6 +25,7 @@ export default class App extends Component {
     }
 
     addItem = (text, color) => {
+
         const newItem = this.createTodoItem(text, color);
 
         this.setState(({todoData}) => {
@@ -38,7 +40,27 @@ export default class App extends Component {
 
     };
 
+    toggleProperly = (arr, id, propName) => {
+        const idx = arr.findIndex((el) => el.id === id);
+        const oldItem = arr[idx];
+        const newItem = {...oldItem, [propName]: !oldItem[propName]};
+
+        return [
+            ...arr.slice(0, idx),
+            newItem,
+            ...arr.slice(idx + 1)
+        ];
+
+
+    };
+
     onEditItem = (id) => {
+        this.setState(({todoData}) => {
+
+            return {
+                todoData: this.toggleProperly(todoData, id, 'edit')
+            };
+        });
 
     };
 
@@ -55,32 +77,39 @@ export default class App extends Component {
             };
         });
     };
+
     onChecked = (id) => {
         this.setState(({todoData}) => {
-            const idx = todoData.findIndex((el) => el.id === id);
-
-            const oldItem = todoData[idx];
-            const newItem = {...oldItem, checked: !oldItem.checked};
-            const newArray = [
-                ...todoData.slice(0, idx),
-                newItem,
-                ...todoData.slice(idx + 1)
-            ];
 
             return {
 
-                todoData: newArray
+                todoData: this.toggleProperly(todoData, id, 'checked')
             };
-
 
         });
 
     };
+
     onRadioBtn = () => {
-     // console.log('work')
-        console.log(this.state.todoData);
-        console.log(this.state.color)
+         console.log(this.state.todoData)
     };
+
+    EditItem = (text, id) => {
+        this.setState(({todoData}) => {const idx = todoData.findIndex((el) => el.id === id);
+            const oldItem = todoData[idx];
+            const newItem = {...oldItem, label: text, edit: !oldItem.edit};
+            const newArray =[
+                ...todoData.slice(0, idx),
+                newItem,
+                ...todoData.slice(idx + 1)
+            ];
+            return {
+                todoData: newArray
+            };
+        });
+
+    };
+
 
     render() {
         // const checkedItem = this.state.todoData.filter((el) => el.checked).length;
@@ -93,6 +122,8 @@ export default class App extends Component {
                           onDeleted={this.deleteItem}
                           onChecked={this.onChecked}
                           onEditItem={this.onEditItem}
+                          EditItem = {this.EditItem}
+
                 />
                 <ItemAddForm onItemAdded={this.addItem}
                              radioBtn={this.onRadioBtn}

@@ -1,0 +1,60 @@
+.todo-list-item.done {
+    text-decoration: line-through;
+}
+.todo-list-item {
+
+}
+.list-item {
+    border-color: #cdfff7;
+    border-width: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 1px;
+}
+
+.edit-item {
+   display: none;
+}
+.todo-list-item.edit {
+    display: none;
+}
+.edit-item.edit {
+    font-family: Snell Roundhand, cursive;
+    border: none ;
+    height: 20px;
+    outline: none;
+    margin-left: 30px;
+    display: inline;
+    color: #cdfff7;
+    background-color: transparent;
+}
+.edit-item.edit:hover{
+    width: 80%;
+}
+
+.span-checkbox {
+    margin: 0;
+    border-style: solid; border-width: 0 1px 0 0 ; color: #ffffff;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+.checkbox{
+    margin-right: 0;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.button.delete {
+    padding: 5px 20px;
+    background-color: #169699;
+    color: white;
+    right: 3px;
+    margin-top: 6px;
+    opacity: 0;
+
+}
+.button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+

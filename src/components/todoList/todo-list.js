@@ -1,5 +1,5 @@
 import React from "react";
-import TodoListItem from "../todo-list-item/todo-list-item";
+import TodoListItem from "../todoListItem/todo-list-item";
 
 import './todo-list.css';
 
@@ -7,29 +7,37 @@ const TodoList = ({
                       todos,
                       onDeleted,
                       onChecked,
-                      onEditItem
+                      onEditItem,
+                      EditItem,
+
+
+
                   }) => {
 
 
     const elements = todos.map((item) => {
 
-        const {id, ...itemProps} = item;
+        const {id, color,  ...itemProps} = item;
 
         return (
-            <li key={id} className="list-item">
+
+            <li key={id} className="list-item" style={{background: color}}>
                 <TodoListItem {...itemProps}
                               onDeleted={() => onDeleted(id)}
                               onChecked={() => onChecked(id)}
                               onEditItem={() => onEditItem(id)}
-                />
-            </li>)
+                              EditItem={(label) => EditItem(label, id)}
 
+                />
+             </li>)
     });
 
     return (
+
         <ul className="list">
             {elements}
         </ul>
+
     )
 };
 export default TodoList;
